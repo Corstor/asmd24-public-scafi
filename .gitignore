@@ -110,3 +110,8 @@ project/plugins/project/
 *.log
 
 # End of https://www.toptal.com/developers/gitignore/api/scala,intellij+all,sbt
+
+.metals
+.vscode
+project
+.bloop
