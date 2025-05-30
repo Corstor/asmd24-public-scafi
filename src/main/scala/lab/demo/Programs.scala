@@ -27,9 +27,9 @@ trait Simulation[R: ClassTag] extends App:
     case i: java.lang.Double => f"${i.doubleValue()}%1.2f"
     case x => x.toString
 
-  val nodes = 100
+  val nodes = 50
   val neighbourRange = 200
-  val (width, height) = (1920, 1080)
+  val (width, height) = (1280, 720)
 
   ViewSetting.windowConfiguration = WindowConfiguration(width, height)
   ViewSetting.labelFontSize = 20
@@ -86,7 +86,8 @@ class Main8 extends AggregateProgramSkeleton:
 object Demo8 extends Simulation[Main8]
 
 class Main9 extends AggregateProgramSkeleton:
-  override def main() = rep(0){_+1}
+  override def main() =
+    branch(sense1)(rep(0)(x => mux(x < 100000)(x+1)(x)))(0)
 
 object Demo9 extends Simulation[Main9]
 
@@ -103,7 +104,7 @@ object Demo11 extends Simulation[Main11]
 class Main12 extends AggregateProgramSkeleton:
   import Builtins.Bounded.of_i
 
-  override def main() = maxHoodPlus(boolToInt(nbr{sense1}))
+  override def main() = foldhoodPlus(Set())(_ ++ _)(nbr{Set(mid)})
 
 object Demo12 extends Simulation[Main12]
 
